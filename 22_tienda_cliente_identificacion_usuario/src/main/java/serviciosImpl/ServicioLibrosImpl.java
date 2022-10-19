@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import modelo.Categoria;
 import modelo.Libro;
 import servicios.ServicioLibros;
 
@@ -30,6 +31,9 @@ public class ServicioLibrosImpl implements ServicioLibros{
 
 	@Override
 	public void registrarLibro(Libro l) {
+		Categoria c = (Categoria)sessionFactory.getCurrentSession().get(Categoria.class, l.getIdCategoria());
+		l.setCategoria(c);;
+		
 		sessionFactory.getCurrentSession().save(l);
 		//hibernate una vez ha registrado un objeto
 		//le asigna al mismo la id generada

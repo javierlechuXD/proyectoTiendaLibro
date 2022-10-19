@@ -23,6 +23,7 @@
 		titulo: ${libro.titulo} <br>
 		alta: ${libro.alta} <br>
 		precio: ${libro.precio} <br>
+		categoría: ${libro.categoria.nombre}
 	</div>
 </c:forEach>
 

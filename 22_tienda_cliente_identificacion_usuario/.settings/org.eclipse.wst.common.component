@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="22_tienda_cliente_identificacion_usuario">
+        
+    <wb-module deploy-name="23_tienda_categorias">
+                
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-        <property name="context-root" value="22_tienda_cliente_identificacion_usuario"/>
-        <property name="java-output-path" value="/22_tienda_cliente_identificacion_usuario/build/classes"/>
+                
+        <property name="java-output-path" value="/23_tienda_categorias/build/classes"/>
+        <property name="context-root" value="23_tienda_categorias"/>
+            
     </wb-module>
+    
 </project-modules>

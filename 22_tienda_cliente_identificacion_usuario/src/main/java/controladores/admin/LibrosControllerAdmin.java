@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import modelo.Libro;
+import servicios.ServicioCategorias;
 import servicios.ServicioLibros;
 import utilidadesArchivos.GestorArchivos;
 
@@ -17,6 +18,8 @@ public class LibrosControllerAdmin {
 
 	@Autowired
 	private ServicioLibros servicioLibros;
+	
+	@Autowired ServicioCategorias servicioCategorias;
 	
 	@RequestMapping("gestionarLibros")
 	public String gestionarLibros(Model model) {
@@ -29,6 +32,11 @@ public class LibrosControllerAdmin {
 		Libro libro = new Libro();
 		libro.setAlta(true);
 		model.addAttribute("nuevoLibro",libro);
+		// Pedir las categorías para darselas a formRegistroLibro
+		
+		// El tipo de dato idea en java para desplegables es el tipo Map
+		// donde cada elemento tiene un elemento y un valor
+		model.addAttribute("categorias",servicioCategorias.obtenerCategoriasParaDesplegable());
 		return "admin/formRegistroLibro";
 	}
 	
