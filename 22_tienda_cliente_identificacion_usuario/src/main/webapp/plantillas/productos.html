@@ -1,0 +1,17 @@
+listado de libros en venta:<br>
+
+{{#.}}
+	<div style="margin: 20px;">
+		
+		<div>
+			<img src="subidas/{{id}}.jpg" style="height: 80px"/>
+		</div>
+		<div>
+			titulo: {{titulo}} <br>
+			precio: {{precio}} <br>
+			<a href="#" id_producto="{{id}}" class="enlace_detalles" >ver detalles</a> 
+			<a href="#" id_producto="{{id}}" class="enlace_comprar" >comprar producto</a>
+		</div>
+		
+	</div>
+{{/.}}
