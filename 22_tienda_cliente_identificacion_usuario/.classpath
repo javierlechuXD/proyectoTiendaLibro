@@ -9,6 +9,5 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Users/flechuga/Desktop/Lechu/lib_spring/lib/org.springframework.web-3.1.3.RELEASE.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
