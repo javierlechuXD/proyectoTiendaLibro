@@ -24,6 +24,12 @@
 		alta: ${libro.alta} <br>
 		precio: ${libro.precio} <br>
 		categoría: ${libro.categoria.nombre}
+		<a onclick="return confirm('¿seguro?');" href="borrarLibro?idBorrar=${libro.id}">
+			borrar
+		</a>&nbsp;
+		<a href="editarLibro?idEditar=${libro.id}">
+			editar
+		</a>		
 	</div>
 </c:forEach>
 

@@ -53,15 +53,17 @@ public class ServicioLibrosImpl implements ServicioLibros{
 	}
 
 	@Override
-	public void editarLibro(Libro l, int id) {
-		//en un futuro no pediremos la id
-		sessionFactory.getCurrentSession().merge(l);
-	}
-
-	@Override
 	public Libro obtenerLibroPorId(int id) {
 		return (Libro)sessionFactory.getCurrentSession().get(Libro.class, id);
 	}
+
+	@Override
+	public void guardarCambiosLibro(Libro l) {
+		Categoria c = (Categoria)sessionFactory.getCurrentSession().get(Categoria.class, l.getIdCategoria());
+		l.setCategoria(c);
+		sessionFactory.getCurrentSession().merge(l);
+	}
+	
 	
 	
 }

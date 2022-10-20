@@ -1,0 +1,5 @@
+  ///////////////////////////////
+ //// Directorio de Subidas ////
+///////////////////////////////
+
+C:\Users\flechuga\Desktop\ws-Eclipse\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\proyectoTiendaFinalLibrosGIT\/subidas

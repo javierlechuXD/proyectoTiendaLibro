@@ -1,5 +1,7 @@
 package controladores.admin;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +53,31 @@ public class LibrosControllerAdmin {
 		GestorArchivos.guardarPortadaLibro(nuevoLibro, rutaRealDelProyecto);
 		return gestionarLibros(model);
 		
+	}
+	
+	@RequestMapping("borrarLibro")
+	public String borrarLibro(String idBorrar, HttpServletRequest request, Model model) {
+		servicioLibros.borrarLibro(Integer.parseInt(idBorrar));
+		String rutaRealDelProyecto = 
+				request.getServletContext().getRealPath("");
+		GestorArchivos.borrarPortadaLibro(idBorrar, rutaRealDelProyecto);
+		return gestionarLibros(model);
+	}
+	
+	@RequestMapping("editarLibro")
+	public String editarLibro(String idEditar, Model model) {
+		Libro l = servicioLibros.obtenerLibroPorId(Integer.parseInt(idEditar));
+		Map <String, String> mapCategorias = servicioCategorias.obtenerCategoriasParaDesplegable();
+		l.setIdCategoria(l.getCategoria().getId());
+		model.addAttribute("libro",l);
+		model.addAttribute("categorias",mapCategorias);
+		return "admin/formEditarLibro";
+	}
+	
+	@RequestMapping("guardarCambiosLibro")
+	public String guardarCambiosLibro(Libro libro, Model model) {
+		servicioLibros.guardarCambiosLibro(libro);
+		return gestionarLibros(model);
 	}
 	
 	

@@ -6,6 +6,17 @@ import java.io.IOException;
 import modelo.Libro;
 
 public class GestorArchivos {
+	
+	public static boolean borrarPortadaLibro(String idLibro, String rutalReal) {
+		File f = new File(rutalReal+"/subidas/"+idLibro+".jpg");
+		if(f.delete()) {
+			System.out.println("Archivo borrado correctamente");
+			return true;
+		}else {
+			System.out.println("No se pudo borrar el archivo");
+			return false;
+		}
+	}
 
 	public static void guardarPortadaLibro(Libro l, String rutaReal) {
 		String nombreArchivo = l.getId() + ".jpg";

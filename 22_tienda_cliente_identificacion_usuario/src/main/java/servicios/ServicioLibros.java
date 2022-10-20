@@ -15,6 +15,6 @@ public interface ServicioLibros {
 	
 	public void borrarLibro(int id);
 	
-	public void editarLibro(Libro l, int id);
+	public void guardarCambiosLibro(Libro l);
 	
 }
