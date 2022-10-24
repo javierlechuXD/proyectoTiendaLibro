@@ -27,12 +27,15 @@ function comprar_producto(){
 	if(nombre_login == ""){
 		alert("debes identificarte para poder comprar productos");
 	}else{
+		// Así obtengo la id del producto a agregar al carrito
 		var id = $(this).attr("id_producto");
+		var cantidadS = $("#input-cantidad-"+id).val();
 		//para hacer un post con jquery es mas comodo 
 		//lo siguiente:
 		$.post("ServicioWebCarrito/agregarLibro",
 			{
-				idProducto: id
+				idProducto: id,
+				cantidad: cantidadS
 			}
 		).done(function(res){
 			alert(res);

@@ -1,8 +1,10 @@
 package modelo;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Usuario {
@@ -10,6 +12,9 @@ public class Usuario {
 	private String nombre;
 	private String pass;
 	private String email;
+	 
+	@OneToOne
+	private Carrito carrito;
 	
 	@Id
 	@GeneratedValue
@@ -59,6 +64,15 @@ public class Usuario {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+
+	public Carrito getCarrito() {
+		return carrito;
+	}
+
+	public void setCarrito(Carrito carrito) {
+		this.carrito = carrito;
 	}
 
 	@Override
