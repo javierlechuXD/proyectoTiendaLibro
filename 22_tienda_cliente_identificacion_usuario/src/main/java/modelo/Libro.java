@@ -42,6 +42,16 @@ public class Libro {
 		this.precio = precio;
 		this.id = id;
 	}
+	
+	
+
+	public Libro(String titulo, double precio, boolean alta, Categoria categoria) {
+		super();
+		this.titulo = titulo;
+		this.precio = precio;
+		this.alta = alta;
+		this.categoria = categoria;
+	}
 
 	public String getTitulo() {
 		return titulo;
