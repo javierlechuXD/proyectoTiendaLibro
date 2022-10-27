@@ -5,7 +5,7 @@ function cargarEventos(){
 	});
 
 	$("#carrito").click(function(){
-		$("#contenedor").html(plantillas.carrito);
+		mostrar_productos_carrito();
 	});
 	
 	$("#login").click(function(){
@@ -45,6 +45,8 @@ function cargarEventos(){
 			});//end ajax						
 		});//end submit
 	});//end click
+
+
 
 	$("#logout").click(function(e){
 		logout();		

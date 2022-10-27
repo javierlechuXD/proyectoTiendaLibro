@@ -69,6 +69,32 @@ function identificar_usuario(){
 	
 }//end identificar_usuario
 
+	function mostrar_productos_carrito(){
+		
+		if(nombre_login == ""){
+			alert("Debes identificarte para acceder a tu carrito");
+			return;
+		}
+
+		$.getJSON("ServicioWebCarrito/obtenerProdcutosCarrito", function(res){
+
+			$("#contenedor").html(Mustache.render(plantillas.carrito,res));
+			$(".enlace_borrar_prodcuto").click(function(){
+				alert("borrar producto del carrito, por hacer");
+			});
+
+			$(".input_cantidad").change(function(){
+				alert("mandar al servidor nueva cantidad, por hacer");
+			});
+
+
+
+			$("#realizar_pedido").click(function(){
+				alert("realizar el pedido checkout paso 0, por hacer");
+			});
+		});
+	}
+
 function logout(){
 	$.ajax("ServicioWebUsuarios/logout",{
 		success: function(res){

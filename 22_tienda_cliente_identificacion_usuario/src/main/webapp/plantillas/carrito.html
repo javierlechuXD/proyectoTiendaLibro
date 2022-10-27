@@ -1,1 +1,19 @@
 listado de productos que ha ido comprando el usuario
+
+
+{{#.}}
+    <div style="margin: 25px;">
+        titulo: {{titulo}} <br>
+        <img src="subidas/{{libro_id}}.jpg" style="height: 40px;"> <br>
+        precio: {{precio}} &euro; <br>
+        cantidad: <input type="number" id-producto="{{libro_id}}" class="input_cantidad" value="{{cantidad}}" /> <br>
+        <a href="#" class="enlace_borrar_prodcuto" id_producto="{{libro_id}}">Borrar Producto</a>
+    </div>
+
+    <div style="text-align: center; margin: 30px; font-size: 1.5em;">
+    
+        <a href="#" id="realizar_pedido">REALIZAR PEDIDO</a>
+
+    </div>
+
+{{/.}}
