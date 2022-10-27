@@ -30,6 +30,7 @@ Bienvenido a mi tienda online <span style="color: blue" id="inicio_span_nombre_u
 <script type="text/javascript" src="javascript/cargar_eventos.js"></script>
 <script type="text/javascript" src="javascript/funciones.js"></script>
 <script type="text/javascript" src="javascript/globales.js"></script>
+<script type="text/javascript" src="javascript/funciones_checkout.js"></script>
 
 </body>
 </html>
