@@ -15,7 +15,7 @@ public class Pedido {
 	@ManyToOne(optional = false)
 	private Usuario usuario;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "pedido")
 	private List<ProductoPedido> productosPedido = new ArrayList<ProductoPedido>();
 
 	// Se piden en el paso 1:
