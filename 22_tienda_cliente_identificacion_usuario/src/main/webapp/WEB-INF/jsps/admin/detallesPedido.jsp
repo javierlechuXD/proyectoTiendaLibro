@@ -39,7 +39,7 @@
 			<c:forEach var="estado" items="${estados}">
 				<option 
 					<c:if test="${estado.key == pedido.estado}">
-						select="selected"
+						selected
 					</c:if>				
 					value="${estado.key}"> ${estado.value} </option>
 			</c:forEach>
