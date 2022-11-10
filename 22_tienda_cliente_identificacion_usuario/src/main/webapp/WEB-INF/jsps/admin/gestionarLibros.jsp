@@ -29,7 +29,8 @@
 		</a>&nbsp;
 		<a href="editarLibro?idEditar=${libro.id}">
 			editar
-		</a>		
+		</a>
+		<a href="agregarIdioma?idLibro=${libro.id}" onclick="alert('mostrar formulario para registrar para el libro textos en otro idioma'); return false;">Agregar idioma</a>	
 	</div>
 </c:forEach>
 

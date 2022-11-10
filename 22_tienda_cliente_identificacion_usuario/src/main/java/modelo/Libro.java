@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class Libro {
 
 	private String titulo;
+	private String descripcion;
 	private double precio;
 	private boolean alta;
 	
@@ -51,6 +52,16 @@ public class Libro {
 		this.precio = precio;
 		this.alta = alta;
 		this.categoria = categoria;
+	}
+	
+	
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	public String getTitulo() {

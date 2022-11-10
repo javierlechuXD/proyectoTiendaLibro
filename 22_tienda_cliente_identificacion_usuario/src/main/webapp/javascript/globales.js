@@ -5,3 +5,5 @@
 //definidas en un mismo sitio
 
 var nombre_login = "";//nombre del usuario identificado
+
+var idioma_actual = "";

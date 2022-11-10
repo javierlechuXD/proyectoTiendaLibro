@@ -10,25 +10,32 @@ var plantillas = {};// este objeto contendra como atributo
 //que comprueba que las plantillas esten listas
 var intervalo = null;
 
-//cargar los nombres de los archivos de plantillas que hay:
-$.get("ServicioWebPlantillas",function(res){
-	//alert("recibido: " + res);
-	//guardos los nombres de las plantillas que hay en el objeto plantillas
-	//y ya pido el contenido de cada una
-	var arr = JSON.parse(res);
-	for(i in arr){
-		var nombre_archivo = arr[i].split(".")[0];
-		plantillas[nombre_archivo] = "";
-	}
-	console.log("contenido del objeto plantillas");
-	console.log(plantillas);
-	cargarPlantillas();
-});
+function carga_archivos_plantillas(idioma){
+	//cargar los nombres de los archivos de plantillas que hay:
+	$.get("ServicioWebPlantillas",function(res){
+		//alert("recibido: " + res);
+		//guardos los nombres de las plantillas que hay en el objeto plantillas
+		//y ya pido el contenido de cada una
+		var arr = JSON.parse(res);
+		for(i in arr){
+			var nombre_archivo = arr[i].split(".")[0];
+			plantillas[nombre_archivo] = "";
+		}
+		console.log("contenido del objeto plantillas");
+		console.log(plantillas);
+		cargarPlantillas(idioma);
+	});
+}
 
-function cargarPlantillas(){
+function cargarPlantillas(idioma){
+	var carpeta = "plantillas";
+	if(idioma == "en"){
+		carpeta = "plantillas_en";
+	}
+	
 	//funcional:
 	for (i in plantillas){
-		var plantilla_a_cargar = "plantillas/" + i + ".html";
+		var plantilla_a_cargar = carpeta + "/" + i + ".html";
 		//alert("descargando plantilla: " + plantilla_a_cargar);
 	
 		$.ajax(plantilla_a_cargar,

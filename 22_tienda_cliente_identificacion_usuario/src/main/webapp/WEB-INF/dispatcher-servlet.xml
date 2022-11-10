@@ -69,7 +69,8 @@
 	<mvc:annotation-driven/>
 	<mvc:resources location="/javascript/" mapping="/javascript/**"/>	
 	<mvc:resources location="/librerias_js/" mapping="/librerias_js/**"/>	
-	<mvc:resources location="/plantillas/" mapping="/plantillas/**"/>	
+	<mvc:resources location="/plantillas/" mapping="/plantillas/**"/>
+	<mvc:resources location="/plantillas_en/" mapping="/plantillas_en/**"/>	
 	<mvc:resources location="/subidas/" mapping="/subidas/**"/>	
 
 </beans>

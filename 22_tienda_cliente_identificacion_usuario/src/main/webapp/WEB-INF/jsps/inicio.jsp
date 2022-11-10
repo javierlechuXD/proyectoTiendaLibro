@@ -36,6 +36,10 @@
 <script type="text/javascript" src="javascript/funciones.js"></script>
 <script type="text/javascript" src="javascript/globales.js"></script>
 <script type="text/javascript" src="javascript/funciones_checkout.js"></script>
+<script type="text/javascript">
+	idioma_actual = "<spring:message code="codigo.idioma"/>";
+	carga_archivos_plantillas(idioma_actual);
+</script>
 
 </body>
 </html>
