@@ -9,7 +9,7 @@ public interface ServicioLibros {
 	
 	public void registrarLibro(Libro l);
 	
-	public List<Libro> obtenerLibros();
+	public List<Libro> obtenerLibros(String titulo);
 	
 	public Libro obtenerLibroPorId(int id);
 	

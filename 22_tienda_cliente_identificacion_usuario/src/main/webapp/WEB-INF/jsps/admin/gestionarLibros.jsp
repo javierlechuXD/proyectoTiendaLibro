@@ -15,6 +15,13 @@
 	<a href="nuevoLibro">registrar un libro</a>	
 </div>
 
+<div style="margin: 15px">
+	<form action="gestionarLibros">
+		titulo: <input type="text" name="titulo" value="${titulo}"/>
+		<input type="submit" value="BUSCAR"/>
+	</form>
+</div>
+
 <c:forEach var="libro" items="${libros}">
 	<div style="margin: 10px">
 		portada: <br>

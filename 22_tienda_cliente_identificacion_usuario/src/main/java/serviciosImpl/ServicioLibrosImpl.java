@@ -40,8 +40,9 @@ public class ServicioLibrosImpl implements ServicioLibros{
 	}
 
 	@Override
-	public List<Libro> obtenerLibros() {
+	public List<Libro> obtenerLibros(String titulo) {
 		Criteria c = sessionFactory.getCurrentSession().createCriteria(Libro.class);
+		c.add(Restrictions.like("titulo", "%"+titulo+"%"));
 		c.addOrder(Order.desc("id"));
 		return c.list();
 	}
