@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import constantes.Paginacion;
 import modelo.Categoria;
 import modelo.Libro;
 import servicios.ServicioLibros;
@@ -40,10 +41,12 @@ public class ServicioLibrosImpl implements ServicioLibros{
 	}
 
 	@Override
-	public List<Libro> obtenerLibros(String titulo) {
+	public List<Libro> obtenerLibros(String titulo, int comienzo) {
 		Criteria c = sessionFactory.getCurrentSession().createCriteria(Libro.class);
 		c.add(Restrictions.like("titulo", "%"+titulo+"%"));
 		c.addOrder(Order.desc("id"));
+		c.setFirstResult(comienzo);
+		c.setMaxResults(Paginacion.RESULTADOS_POR_PAGINA);
 		return c.list();
 	}
 
@@ -60,6 +63,7 @@ public class ServicioLibrosImpl implements ServicioLibros{
 
 	@Override
 	public void guardarCambiosLibro(Libro l) {
+		System.out.println("Editando libro con id:" + l.getId());
 		Categoria c = (Categoria)sessionFactory.getCurrentSession().get(Categoria.class, l.getIdCategoria());
 		l.setCategoria(c);
 		sessionFactory.getCurrentSession().merge(l);

@@ -20,7 +20,7 @@ public class ServicioWebLibros {
 	@RequestMapping("obtenerLibros")
 	public ResponseEntity<String> obtenerLibros(){
 		
-		String respuesta = new Gson().toJson(servicioLibros.obtenerLibros(""));
+		String respuesta = new Gson().toJson(servicioLibros.obtenerLibros("",0));
 		return new ResponseEntity<String>(respuesta,HttpStatus.OK);
 		
 	}

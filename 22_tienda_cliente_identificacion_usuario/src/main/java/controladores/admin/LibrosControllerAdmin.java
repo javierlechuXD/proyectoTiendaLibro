@@ -1,5 +1,7 @@
 package controladores.admin;
 
+
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import constantes.Paginacion;
 import modelo.Libro;
 import servicios.ServicioCategorias;
 import servicios.ServicioLibros;
@@ -25,9 +28,12 @@ public class LibrosControllerAdmin {
 	@Autowired ServicioCategorias servicioCategorias;
 	
 	@RequestMapping("gestionarLibros")
-	public String gestionarLibros(Model model, @RequestParam(defaultValue = "") String titulo) {
-		model.addAttribute("libros",servicioLibros.obtenerLibros(titulo));
+	public String gestionarLibros(Model model, @RequestParam(defaultValue = "") String titulo, @RequestParam(defaultValue = "0")String comienzo) {
+		int comienzo_int = Integer.parseInt(comienzo);
+		System.out.println("Mostrar resultados desde: " + comienzo_int);
+		model.addAttribute("libros",servicioLibros.obtenerLibros(titulo, comienzo_int));
 		model.addAttribute("titulo", titulo);
+		model.addAttribute("siguiente", comienzo_int + Paginacion.RESULTADOS_POR_PAGINA);
 		return "admin/gestionarLibros";
 	}
 	
@@ -46,6 +52,10 @@ public class LibrosControllerAdmin {
 	
 	@RequestMapping("guardarNuevoLibro")
 	public String guardarNuevoLibro(Libro nuevoLibro, Model model, HttpServletRequest request ) {
+		
+		if (nuevoLibro.getPortada().getSize() != 0) {
+			nuevoLibro.setFechaImagenPortada1(new Date());
+		}
 
 		servicioLibros.registrarLibro(nuevoLibro);
 		String rutaRealDelProyecto = 
@@ -53,7 +63,7 @@ public class LibrosControllerAdmin {
 
 		
 		GestorArchivos.guardarPortadaLibro(nuevoLibro, rutaRealDelProyecto);
-		return gestionarLibros(model, "");
+		return gestionarLibros(model, "", "0");
 		
 	}
 	
@@ -63,12 +73,14 @@ public class LibrosControllerAdmin {
 		String rutaRealDelProyecto = 
 				request.getServletContext().getRealPath("");
 		GestorArchivos.borrarPortadaLibro(idBorrar, rutaRealDelProyecto);
-		return gestionarLibros(model, "");
+		return gestionarLibros(model, "", "0");
 	}
 	
 	@RequestMapping("editarLibro")
 	public String editarLibro(String idEditar, Model model) {
+		System.out.println("Libro a editar parámetro ID: " + idEditar);
 		Libro l = servicioLibros.obtenerLibroPorId(Integer.parseInt(idEditar));
+		System.out.println("Libro devuelto por base datos: " + l.getId());
 		Map <String, String> mapCategorias = servicioCategorias.obtenerCategoriasParaDesplegable();
 		l.setIdCategoria(l.getCategoria().getId());
 		model.addAttribute("libro",l);
@@ -77,9 +89,20 @@ public class LibrosControllerAdmin {
 	}
 	
 	@RequestMapping("guardarCambiosLibro")
-	public String guardarCambiosLibro(Libro libro, Model model) {
+	public String guardarCambiosLibro(Libro libro, Model model, HttpServletRequest request) {
+		if (libro.getPortada().getSize() != 0) {
+			libro.setFechaImagenPortada1(new Date());
+		}
+		
 		servicioLibros.guardarCambiosLibro(libro);
-		return gestionarLibros(model, "");
+		
+		String rutaRealDelProyecto = 
+				request.getServletContext().getRealPath("");
+
+		
+		GestorArchivos.guardarPortadaLibro(libro, rutaRealDelProyecto);
+		
+		return gestionarLibros(model, "", "0");
 	}
 	
 	

@@ -22,17 +22,22 @@
 	</form>
 </div>
 
+<div style="text-align: center;">
+	Paginación: <br>
+	<a href="gestionarLibros?comienzo=${siguiente}">Siguiente</a>
+</div>
+
 <c:forEach var="libro" items="${libros}">
 	<div style="margin: 10px">
 		portada: <br>
-		<img style="height: 60px" src="../subidas/${libro.id}.jpg"/>
+		<img style="height: 60px" src="../subidas/${libro.id}.jpg?token=${libro.fechaImagenPortada1}"/>
 		<br>
 		titulo: ${libro.titulo} <br>
 		alta: ${libro.alta} <br>
 		precio: ${libro.precio} <br>
 		categoría: ${libro.categoria.nombre}
 		<a onclick="return confirm('¿seguro?');" href="borrarLibro?idBorrar=${libro.id}">
-			borrar
+			Borrar
 		</a>&nbsp;
 		<a href="editarLibro?idEditar=${libro.id}">
 			editar

@@ -1,5 +1,9 @@
 package modelo;
 
+
+
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,6 +21,9 @@ public class Libro {
 	private String descripcion;
 	private double precio;
 	private boolean alta;
+	
+	@Column(nullable = true)
+	private Date fechaImagenPortada1;
 	
 	// Vamos a indicar que uno o más libros estén asociados a una categoría
 	// Con optional false indica que idLibro no puede ser nulo//
@@ -119,8 +126,15 @@ public class Libro {
 	public void setIdCategoria(int idCategoria) {
 		this.idCategoria = idCategoria;
 	}
-	
-	
+
+	public Date getFechaImagenPortada1() {
+		return fechaImagenPortada1;
+	}
+
+	public void setFechaImagenPortada1(Date fechaImagenPortada1) {
+		this.fechaImagenPortada1 = fechaImagenPortada1;
+	}
+
 
 	
 }
