@@ -19,12 +19,13 @@ gestion de usuarios: <br>
 
 <c:forEach var="usuario" items="${usuarios}" >
 	<div>
-		nombre: ${usuario.nombre} email: ${usuario.email} 
+		Foto: <img style="height: 80px" src="../subidas/u${usuario.id}.jpg"/> <br>
+		Nombre: ${usuario.nombre} | Email: ${usuario.email} 
 		<a onclick="return confirm('¿seguro?');" href="borrarUsuario?idBorrar=${usuario.id}">
-			borrar
+			Borrar
 		</a>&nbsp;
 		<a href="editarUsuario?idEditar=${usuario.id}">
-			editar
+			Editar
 		</a>		
 	</div>
 </c:forEach>
