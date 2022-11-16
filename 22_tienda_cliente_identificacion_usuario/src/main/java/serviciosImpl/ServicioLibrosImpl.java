@@ -3,6 +3,7 @@ package serviciosImpl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import constantes.Paginacion;
+import constantesSQL.ConstantesSQL;
 import modelo.Categoria;
 import modelo.Libro;
 import servicios.ServicioLibros;
@@ -40,6 +42,15 @@ public class ServicioLibrosImpl implements ServicioLibros{
 		//le asigna al mismo la id generada
 	}
 
+
+	@Override
+	public int obtenerTotalDeLibros(String titulo) {
+		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(ConstantesSQL.OBTENER_TOTAL_LIBROS);
+		query.setParameter("titulo", "%"+ titulo + "%");
+		return Integer.parseInt(query.list().get(0).toString());
+	}
+	
+	
 	@Override
 	public List<Libro> obtenerLibros(String titulo, int comienzo) {
 		Criteria c = sessionFactory.getCurrentSession().createCriteria(Libro.class);
@@ -68,7 +79,7 @@ public class ServicioLibrosImpl implements ServicioLibros{
 		l.setCategoria(c);
 		sessionFactory.getCurrentSession().merge(l);
 	}
-	
+
 	
 	
 }

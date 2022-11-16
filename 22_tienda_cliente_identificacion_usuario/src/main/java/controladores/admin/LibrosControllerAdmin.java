@@ -34,6 +34,8 @@ public class LibrosControllerAdmin {
 		model.addAttribute("libros",servicioLibros.obtenerLibros(titulo, comienzo_int));
 		model.addAttribute("titulo", titulo);
 		model.addAttribute("siguiente", comienzo_int + Paginacion.RESULTADOS_POR_PAGINA);
+		model.addAttribute("anterior", comienzo_int - Paginacion.RESULTADOS_POR_PAGINA);
+		model.addAttribute("total", servicioLibros.obtenerTotalDeLibros(titulo));
 		return "admin/gestionarLibros";
 	}
 	

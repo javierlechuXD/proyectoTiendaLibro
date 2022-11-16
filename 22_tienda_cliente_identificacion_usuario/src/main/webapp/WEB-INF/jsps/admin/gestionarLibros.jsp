@@ -24,7 +24,13 @@
 
 <div style="text-align: center;">
 	Paginación: <br>
-	<a href="gestionarLibros?comienzo=${siguiente}">Siguiente</a>
+	Total Libros: ${total} <br>
+	<c:if test ="${anterior >= 0}">
+		<a href="gestionarLibros?comienzo=${anterior}&titulo=${titulo}">Anterior</a>
+	</c:if>
+	<c:if test ="${siguiente < total}">
+		<a href="gestionarLibros?comienzo=${siguiente}&titulo=${titulo}">Siguiente</a>
+	</c:if>
 </div>
 
 <c:forEach var="libro" items="${libros}">
