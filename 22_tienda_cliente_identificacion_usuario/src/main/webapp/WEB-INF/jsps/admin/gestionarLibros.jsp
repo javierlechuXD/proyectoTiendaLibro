@@ -35,8 +35,10 @@
 
 <c:forEach var="libro" items="${libros}">
 	<div style="margin: 10px">
-		portada: <br>
-		<img style="height: 60px" src="../subidas/${libro.id}.jpg?token=${libro.fechaImagenPortada1}"/>
+		portada: <br>		
+		<object style="height: 60px" data="../subidas/${libro.id}.jpg?token=${libro.fechaImagenPortada1}">
+			<img style="height: 60px" src="../subidas/libro.png"/>
+		</object>
 		<br>
 		titulo: ${libro.titulo} <br>
 		alta: ${libro.alta} <br>

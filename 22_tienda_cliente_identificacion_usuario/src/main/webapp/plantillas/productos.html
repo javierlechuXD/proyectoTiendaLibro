@@ -1,10 +1,17 @@
 listado de libros en venta:<br>
 
+<div style="margin: 10px">
+	Buscardor: <br>
+	Titulo: <input id="buscador" type="text" />
+</div>
+
 {{#.}}
 	<div style="margin: 20px;">
 		
 		<div>
-			<img src="subidas/{{id}}.jpgtoken={fechaImagenPortada1}" style="height: 80px"/>
+			<object style="height: 60px" data="subidas/{{id}}.jpg?token={{fechaImagenPortada1}}">
+				<img style="height: 60px" src="subidas/libro.png"/>
+			</object>
 		</div>
 		<div>
 			titulo: {{titulo}} <br>
