@@ -4,10 +4,10 @@ function mostrar_productos(){
 	//y mostrar su resultado usando una plantilla
 	$.get("ServicioWebLibros/obtenerLibros",function(res){
 		var libros = JSON.parse(res);
-		var resultado = plantillas.productos_buscador; 
+		var resultado = plantillas.productos_buscador_paginacion; 
 		resultado += Mustache.render(plantillas.productos,libros);
 		$("#contenedor").html(resultado);
-		$("#buscador_titulo").keyup(mostrar_productos_buscador);
+		$("#buscador_titulo").keyup(mostrar_productos_buscador_paginacion);
 		$(".enlace_detalles").click(function(e){
 			//this -> es el elemento sobre el que se hizo click en este caso
 			//$(this) es obtener el mismo elemento en forma de jquery
@@ -20,24 +20,49 @@ function mostrar_productos(){
 			//en una plantilal el resultado obtenido
 		});//end click detales
 		$(".enlace_comprar").click(comprar_producto);
+		$("#enlace_anterior").attr("comienzo", comienzo-10);
+		$("#enlace_siguiente").attr("comienzo", comienzo+10);
+		$("#enlace_anterior").click(
+			function(){
+				comienzo = parseInt($(this).attr("comienzo"));
+				mostrar_productos_buscador_paginacion();
+			});
+		$("#enlace_siguiente").click(
+			function(){
+				comienzo = parseInt($(this).attr("comienzo"));
+				mostrar_productos_buscador_paginacion();
+			});
 	});//end get obtenerLibros
 	//$("#contenedor").html(plantillas.productos);
 }//end mostrar_productos
 
 
-function mostrar_productos_buscador(){
+function mostrar_productos_buscador_paginacion(){
 	titulo_buscar = $("#buscador_titulo").val();
-	console.log("Buscar: " + titulo_buscar);
+	console.log("Buscar: " + titulo_buscar + " Comienzo: " + comienzo);
 	$.get("ServicioWebLibros/obtenerLibros",{
-		titulo: titulo_buscar
+		titulo: titulo_buscar,
+		comienzo: comienzo
 	}).done(function(res){
 		var libros = JSON.parse(res);
-		var resultado = plantillas.productos_buscador; 
+		var resultado = plantillas.productos_buscador_paginacion; 
 		resultado += Mustache.render(plantillas.productos,libros);
 		$("#contenedor").html(resultado);
 		$("#buscador_titulo").focus();
 		$("#buscador_titulo").val(titulo_buscar);
-		$("#buscador_titulo").keyup(mostrar_productos_buscador);
+		$("#buscador_titulo").keyup(mostrar_productos_buscador_paginacion);
+		$("#enlace_anterior").attr("comienzo", comienzo-10);
+		$("#enlace_siguiente").attr("comienzo", comienzo+10);
+		$("#enlace_anterior").click(
+			function(){
+				comienzo = parseInt($(this).attr("comienzo"));
+				mostrar_productos_buscador_paginacion();
+			});
+		$("#enlace_siguiente").click(
+			function(){
+				comienzo = parseInt($(this).attr("comienzo"));
+				mostrar_productos_buscador_paginacion();
+			});
 		$(".enlace_detalles").click(function(e){
 			//this -> es el elemento sobre el que se hizo click en este caso
 			//$(this) es obtener el mismo elemento en forma de jquery

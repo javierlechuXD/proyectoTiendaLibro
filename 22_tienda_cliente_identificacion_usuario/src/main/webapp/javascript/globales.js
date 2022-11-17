@@ -9,3 +9,5 @@ var nombre_login = "";//nombre del usuario identificado
 var idioma_actual = "";
 
 var titulo_buscar = "";
+
+var comienzo = 0;
