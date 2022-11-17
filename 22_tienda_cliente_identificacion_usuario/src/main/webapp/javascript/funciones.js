@@ -4,8 +4,10 @@ function mostrar_productos(){
 	//y mostrar su resultado usando una plantilla
 	$.get("ServicioWebLibros/obtenerLibros",function(res){
 		var libros = JSON.parse(res);
-		var resultado = Mustache.render(plantillas.productos,libros);
+		var resultado = plantillas.productos_buscador; 
+		resultado += Mustache.render(plantillas.productos,libros);
 		$("#contenedor").html(resultado);
+		$("#buscador_titulo").keyup(mostrar_productos_buscador);
 		$(".enlace_detalles").click(function(e){
 			//this -> es el elemento sobre el que se hizo click en este caso
 			//$(this) es obtener el mismo elemento en forma de jquery
@@ -22,6 +24,34 @@ function mostrar_productos(){
 	//$("#contenedor").html(plantillas.productos);
 }//end mostrar_productos
 
+
+function mostrar_productos_buscador(){
+	titulo_buscar = $("#buscador_titulo").val();
+	console.log("Buscar: " + titulo_buscar);
+	$.get("ServicioWebLibros/obtenerLibros",{
+		titulo: titulo_buscar
+	}).done(function(res){
+		var libros = JSON.parse(res);
+		var resultado = plantillas.productos_buscador; 
+		resultado += Mustache.render(plantillas.productos,libros);
+		$("#contenedor").html(resultado);
+		$("#buscador_titulo").focus();
+		$("#buscador_titulo").val(titulo_buscar);
+		$("#buscador_titulo").keyup(mostrar_productos_buscador);
+		$(".enlace_detalles").click(function(e){
+			//this -> es el elemento sobre el que se hizo click en este caso
+			//$(this) es obtener el mismo elemento en forma de jquery
+			var id = $(this).attr("id_producto");
+			alert("mostrar detalles del libro de id: " + id + "\n" + 
+			"pedir a un servicio web todos los datos del libro dandole diche id" +
+			"y mostrarlos en una nueva plantilla, junto con sus dos imagenes " + "\n" +
+		    "en dicha plantilla debera estar el enlace 'comprar producto' ");
+			//ahora lo suyo es llamar a obter libro por id y mostrar
+			//en una plantilal el resultado obtenido
+		});//end click detales
+		$(".enlace_comprar").click(comprar_producto);
+	});
+}	
 
 function comprar_producto(){
 	if(nombre_login == ""){
