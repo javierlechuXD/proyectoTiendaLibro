@@ -18,11 +18,10 @@ un archivo
 	titulo: <springform:input path="titulo"/> <br>
 	alta: <springform:checkbox path="alta"/> <br>
 	precio: <springform:input path="precio"/> <br>
-	categoría: <springform:select path="idCategoria">
-			<springform:options items="${categorias}"></springform:options><br>
-	</springform:select>
+	categoria: <springform:select path="idCategoria">
+					<springform:options items="${categorias}"/>
+			   </springform:select><br>
 	portada: <springform:input path="portada" type="file" /> <br>
-	
 	<input type="submit" value="Registrar Libro">
 </springform:form>
 

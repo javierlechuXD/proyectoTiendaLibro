@@ -19,6 +19,9 @@ gestion de usuarios: <br>
 
 <c:forEach var="usuario" items="${usuarios}" >
 	<div>
+		
+		foto: <img style="height: 80px" src="../subidas/u${usuario.id}.jpg"/> <br>
+		
 		nombre: ${usuario.nombre} email: ${usuario.email} 
 		<a onclick="return confirm('¿seguro?');" href="borrarUsuario?idBorrar=${usuario.id}">
 			borrar

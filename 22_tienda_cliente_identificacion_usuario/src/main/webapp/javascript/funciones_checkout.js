@@ -14,7 +14,8 @@ function checkout_paso_1(){
 				provincia: provincia	
 			}
 		).done(function(res){
-			if(res = "ok"){
+			if(res == "ok"){
+				//mostrar la plantilla del paso 2
 				checkout_paso_2();
 			}else{
 				alert(res);
@@ -30,21 +31,27 @@ function checkout_paso_2(){
 			titular: $("#titular_tarjeta").val(),
 			numero: $("#numero_tarjeta").val()
 		}).done(function(res){
-			if(res.substring(0,2) == "ok"){
+			if( res.substring(0,2) == "ok" ){
 				let json = JSON.parse(res.substring(3,res.length));
-				let html = Mustache.render(plantillas.checkout_3, json);
+				let html = Mustache.render(plantillas.checkout_3,json);
 				$("#contenedor").html(html);
-				$("#botton_confirmar_pedido").click(checkout_confirmar);
+				$("#boton_confirmar_pedido").click(checkout_confirmar);
 			}
-		});//done
+		});//done 
 	});//end click aceptar_paso_2
-}
+}//end checkout_paso_2
 
 function checkout_confirmar(){
 	$.ajax("ServicioWebPedidos/confirmarPedido",{
-		success: function(res){
+		success : function(res){
 			alert(res);
 			mostrar_productos();
 		}
 	});
-}
+}//end checkout_confirmar
+
+
+
+
+
+

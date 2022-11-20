@@ -15,34 +15,56 @@
 	<a href="nuevoLibro">registrar un libro</a>	
 </div>
 
-<div style="margin: 15px">
+<div style="margin: 10px">
 	<form action="gestionarLibros">
-		titulo: <input type="text" name="titulo" value="${titulo}"/>
-		<input type="submit" value="BUSCAR"/>
+		titulo: <input type="text" name="titulo" value="${titulo}" />
+		<input type="submit" value="BUSCAR">
 	</form>
 </div>
 
+
 <div style="text-align: center;">
-	Paginación: <br>
-	<a href="gestionarLibros?comienzo=${siguiente}">Siguiente</a>
+	paginacion: <br>
+	total de libros: ${total} <br>
+	
+	<c:if test="${ anterior >= 0 }">
+			<a href="gestionarLibros?comienzo=${anterior}&titulo=${titulo}">anterior</a>	
+	</c:if>
+
+	&nbsp;&nbsp;&nbsp;&nbsp;
+
+	<c:if test="${ siguiente < total }">
+			<a href="gestionarLibros?comienzo=${siguiente}&titulo=${titulo}">siguiente</a>
+	</c:if>
+
+
 </div>
+
 
 <c:forEach var="libro" items="${libros}">
 	<div style="margin: 10px">
 		portada: <br>
-		<img style="height: 60px" src="../subidas/${libro.id}.jpg?token=${libro.fechaImagenPortada1}"/>
+		<object style="height: 60px" data="../subidas/${libro.id}.jpg?fai=${libro.fechaImagenPortada}">
+			<img style="height: 60px" src="../subidas/libro.jpg"/>		
+		</object>
+		
 		<br>
 		titulo: ${libro.titulo} <br>
 		alta: ${libro.alta} <br>
 		precio: ${libro.precio} <br>
-		categoría: ${libro.categoria.nombre}
+		categoria: ${libro.categoria.nombre} <br>
 		<a onclick="return confirm('¿seguro?');" href="borrarLibro?idBorrar=${libro.id}">
-			Borrar
+			borrar
 		</a>&nbsp;
 		<a href="editarLibro?idEditar=${libro.id}">
 			editar
+		</a>&nbsp;
+		<a 
+		href="agregarIdioma?idLibro=${libro.id}"
+		onclick="alert('mostrar formulario para registrar para el libro textos en otro idioma'); return false;">
+			agregar textos en otro idioma
 		</a>
-		<a href="agregarIdioma?idLibro=${libro.id}" onclick="alert('mostrar formulario para registrar para el libro textos en otro idioma'); return false;">Agregar idioma</a>	
+			
 	</div>
 </c:forEach>
 

@@ -20,7 +20,7 @@
   <context:component-scan base-package="controladores"/>
   <context:component-scan base-package="serviciosWEB"/>
   <context:component-scan base-package="serviciosImpl"/>
-    <context:component-scan base-package="servicioSetUp"/>
+   <context:component-scan base-package="servicioSetUp"/>
   
 
 </beans>

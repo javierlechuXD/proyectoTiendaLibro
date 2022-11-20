@@ -9,21 +9,20 @@
 </head>
 <body>
 
-Actualiza los datos del nuevo libro:
+actualiza los datos del libro:
 <!-- 
 con enctype="multipart/form-data" indicamos que el formulario va a contener 
 un archivo
  -->
 <springform:form modelAttribute="libro" action="guardarCambiosLibro" enctype="multipart/form-data" >
-<springform:input type="hidden" path="id"/> <br>
 	titulo: <springform:input path="titulo"/> <br>
 	alta: <springform:checkbox path="alta"/> <br>
 	precio: <springform:input path="precio"/> <br>
-	categoría: <springform:select path="idCategoria">
-			<springform:options items="${categorias}"></springform:options><br>
-	</springform:select>
+	categoria: <springform:select path="idCategoria">
+					<springform:options items="${categorias}"/>
+			   </springform:select><br>
 	portada: <springform:input path="portada" type="file" /> <br>
-	
+	<springform:hidden path="id"/>
 	<input type="submit" value="GUARDAR CAMBIOS">
 </springform:form>
 

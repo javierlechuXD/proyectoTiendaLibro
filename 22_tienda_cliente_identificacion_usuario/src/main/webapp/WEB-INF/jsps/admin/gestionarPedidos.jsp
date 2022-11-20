@@ -1,23 +1,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
+
 <jsp:include page="menu.jsp"></jsp:include>
 
-Listado de Pedidos: <br>
+listado de pedidos: <br>
 
 <c:forEach var="pedido" items="${pedidos}">
 	<div style="margin: 20px">
-		Nombre Completo: ${pedido.nombreCompleto}<br>
-		Dirección: ${pedido.direccion}<br>
-		Estado: ${pedido.estado}<br>
-		<a href="verDetallesPedido?id=${pedido.id}" >Ver Pedido</a>
+		${pedido.nombreCompleto} <br>
+		${pedido.direccion} <br>
+		estado: ${pedido.estado} <br>
+		<a href="verDetallesPedido?id=${pedido.id}">ver pedido</a>
 	</div>
 </c:forEach>
 

@@ -29,37 +29,30 @@
 	</bean>
 	
 	<!-- configurar interceptores -->
-	
 	<mvc:interceptors>
-	
-	<!-- hay distintas formas de declarar interceptores, dos formas serían: -->
-	
-			<!-- interceptor que provoca el cambio de idioma -->
-		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		
+		<!-- interceptor que provoca el cambio de idioma -->
+		<bean 
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
 			<property name="paramName" value="lang" />
 		</bean>
-	
-	
-		<!-- Interceptor que protege administración -->
+		
+		<!-- interceptor que protege administracion -->
 		<mvc:interceptor>
 			<mvc:mapping path="/admin/*"/>
 			<bean id="interceptorAdmin" class="interceptores.InterceptorAdmin"/>
 		</mvc:interceptor>
+		
 	</mvc:interceptors>
 	
-	
-	
-	<!-- configuración para el cambio de idioma -->
+	<!-- configuracion para el cambio de idioma -->
 	<bean id="messageSource"
-	 class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-	 <!-- Indica dónde están los messages. Busca el archivo que sea  messages_es, messages_en etc-->
-		<property name="basename" value="/WEB-INF/messages/messages"/>
+	 class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
+	>
+		<property name="basename" value="/WEB-INF/messages/messages" />
 	</bean>
-	
-	<!-- Indica que se guarda en sesión el idioma -->
-	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
-
-
+	<bean id="localeResolver"
+	class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
 
 	<!-- tenemos que indicar lo siguiente para que 
 	desde una vista podamos incluir archivos externos
@@ -69,7 +62,7 @@
 	<mvc:annotation-driven/>
 	<mvc:resources location="/javascript/" mapping="/javascript/**"/>	
 	<mvc:resources location="/librerias_js/" mapping="/librerias_js/**"/>	
-	<mvc:resources location="/plantillas/" mapping="/plantillas/**"/>
+	<mvc:resources location="/plantillas/" mapping="/plantillas/**"/>	
 	<mvc:resources location="/plantillas_en/" mapping="/plantillas_en/**"/>	
 	<mvc:resources location="/subidas/" mapping="/subidas/**"/>	
 

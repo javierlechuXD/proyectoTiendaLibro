@@ -25,14 +25,14 @@ function carga_archivos_plantillas(idioma){
 		console.log(plantillas);
 		cargarPlantillas(idioma);
 	});
-}
+}//end carga_archivos_plantillas
 
 function cargarPlantillas(idioma){
+	
 	var carpeta = "plantillas";
 	if(idioma == "en"){
 		carpeta = "plantillas_en";
 	}
-	
 	//funcional:
 	for (i in plantillas){
 		var plantilla_a_cargar = carpeta + "/" + i + ".html";
