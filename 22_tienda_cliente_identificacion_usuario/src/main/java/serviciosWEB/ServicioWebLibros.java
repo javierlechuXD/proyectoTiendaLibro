@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.gson.Gson;
 
-import datos.servicioWEB.RespuestaLibros;
 import servicios.ServicioLibros;
 
 @Controller
@@ -22,10 +21,7 @@ public class ServicioWebLibros {
 	@RequestMapping("obtenerLibros")
 	public ResponseEntity<String> obtenerLibros(@RequestParam(defaultValue = "") String titulo,  @RequestParam(defaultValue = "0" ) String comienzo){
 		
-		RespuestaLibros rl = new RespuestaLibros();
-		rl.setLibros(servicioLibros.obtenerLibros(titulo,Integer.parseInt(comienzo)));
-		rl.setTotal(servicioLibros.obtenerTotalDeLibros(titulo));		
-		String respuesta = new Gson().toJson(rl);
+		String respuesta = new Gson().toJson(servicioLibros.obtenerLibros(titulo,Integer.parseInt(comienzo)));
 		return new ResponseEntity<String>(respuesta,HttpStatus.OK);
 		
 	}
