@@ -1,0 +1,2 @@
+directorio de subidas:
+C:\Users\Ares\Desktop\Ares\ws\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\23_tienda_categorias\subidas
