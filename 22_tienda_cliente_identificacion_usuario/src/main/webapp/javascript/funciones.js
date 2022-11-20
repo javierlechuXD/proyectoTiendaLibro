@@ -2,89 +2,71 @@
 function mostrar_productos(){
 	//pedir al servicio de libros los libros
 	//y mostrar su resultado usando una plantilla
-	$.get("ServicioWebLibros/obtenerLibros",function(res){
-		var libros = JSON.parse(res);
-		var resultado = plantillas.productos_buscador_paginacion;
-		resultado += Mustache.render(plantillas.productos,libros);
-		$("#contenedor").html(resultado);
-		$("#buscador_titulo").keyup(mostrar_productos_buscador_paginacion);	
-		$("#enlace_anterior").attr("comienzo",comienzo-10);
-		$("#enlace_siguiente").attr("comienzo",comienzo+10);
-		$("#enlace_anterior").click(
-			function(){
-				comienzo = parseInt($(this).attr("comienzo"));
-				mostrar_productos_buscador_paginacion();
-				
-			}
-		);//end click enlace anterior
-		$("#enlace_siguiente").click(
-			function(){
-				comienzo = parseInt($(this).attr("comienzo"));
-				mostrar_productos_buscador_paginacion();
-			}	
-		);
-		
-		$(".enlace_detalles").click(function(e){
-			//this -> es el elemento sobre el que se hizo click en este caso
-			//$(this) es obtener el mismo elemento en forma de jquery
-			var id = $(this).attr("id_producto");
-			alert("mostrar detalles del libro de id: " + id + "\n" + 
-			"pedir a un servicio web todos los datos del libro dandole diche id" +
-			"y mostrarlos en una nueva plantilla, junto con sus dos imagenes " + "\n" +
-		    "en dicha plantilla debera estar el enlace 'comprar producto' ");
-			//ahora lo suyo es llamar a obter libro por id y mostrar
-			//en una plantilal el resultado obtenido
-		});//end click detales
-		$(".enlace_comprar").click(comprar_producto);
-	});//end get obtenerLibros
-	//$("#contenedor").html(plantillas.productos);
+	$("#contenedor").html(plantillas.productos);
+	comienzo = 0;
+	titulo_buscar = "";
+	$("#buscador_titulo").keyup(
+		function(){
+			titulo_buscar = this.value;
+			refresca_listado();
+		}
+	);
+	$("#enlace_anterior").click(
+		function(){
+			comienzo -= 10
+			refresca_listado();
+		}
+	);//end click enlace anterior
+	$("#enlace_siguiente").click(
+		function(){
+			comienzo += 10; 
+			refresca_listado();
+		}	
+	);	
+	refresca_listado();
 }//end mostrar_productos
 
-function mostrar_productos_buscador_paginacion(){
-	titulo_buscar = $("#buscador_titulo").val();
-	console.log("buscar: " + titulo_buscar + 
-	" comienzo: " + comienzo);	
-	$.get("ServicioWebLibros/obtenerLibros",
-	{
-		titulo : titulo_buscar,
+function refresca_listado(){
+	
+	if( comienzo <= 0 ){
+		$("#enlace_anterior").hide();
+	}else{
+		$("#enlace_anterior").show();
+	}
+	
+	$.getJSON("ServicioWebLibros/obtenerLibros",{
+		titulo: titulo_buscar,
 		comienzo: comienzo
-	}).done(function(res){
-		var libros = JSON.parse(res);
-		var resultado = plantillas.productos_buscador_paginacion;
-		resultado += Mustache.render(plantillas.productos,libros);
-		$("#contenedor").html(resultado);
-		$("#buscador_titulo").focus();
-		$("#buscador_titulo").val(titulo_buscar);
-		$("#buscador_titulo").keyup(mostrar_productos_buscador_paginacion);
-		$("#enlace_anterior").attr("comienzo",comienzo-10);
-		$("#enlace_siguiente").attr("comienzo",comienzo+10);
-		$("#enlace_anterior").click(
-			function(){
-				comienzo = parseInt($(this).attr("comienzo"));
-				mostrar_productos_buscador_paginacion();
-				
+	}).done( 
+		function(res){
+			let libros = res.libros;
+			let total_libros = res.total;
+			
+			if( comienzo + 10 > total_libros ){
+				$("#enlace_siguiente").hide();
+			}else{
+				$("#enlace_siguiente").show();
 			}
-		);//end click enlace anterior
-		$("#enlace_siguiente").click(
-			function(){
-				comienzo = parseInt($(this).attr("comienzo"));
-				mostrar_productos_buscador_paginacion();
-			}	
-		);		
-		$(".enlace_detalles").click(function(e){
-			//this -> es el elemento sobre el que se hizo click en este caso
-			//$(this) es obtener el mismo elemento en forma de jquery
-			var id = $(this).attr("id_producto");
-			alert("mostrar detalles del libro de id: " + id + "\n" + 
-			"pedir a un servicio web todos los datos del libro dandole diche id" +
-			"y mostrarlos en una nueva plantilla, junto con sus dos imagenes " + "\n" +
-		    "en dicha plantilla debera estar el enlace 'comprar producto' ");
-			//ahora lo suyo es llamar a obter libro por id y mostrar
-			//en una plantilal el resultado obtenido
-		});//end click detales
-		$(".enlace_comprar").click(comprar_producto);		
-	});//end get/done
-}//end mostrar_productos_buscador
+						
+			$("#productos_listado").html(Mustache.render(plantillas.productos_listado,libros));
+			$("#total_libros").html(total_libros);
+			$(".enlace_detalles").click(mostrar_detalles);//end click detales
+			$(".enlace_comprar").click(comprar_producto);
+		}
+	);//end get obtenerLibros
+}//end refresca_listado
+
+function mostrar_detalles(){
+	//this -> es el elemento sobre el que se hizo click en este caso
+	//$(this) es obtener el mismo elemento en forma de jquery
+	let id = $(this).attr("id_producto");
+	alert("mostrar detalles del libro de id: " + id + "\n" + 
+	"pedir a un servicio web todos los datos del libro dandole diche id" +
+	"y mostrarlos en una nueva plantilla, junto con sus dos imagenes " + "\n" +
+    "en dicha plantilla debera estar el enlace 'comprar producto' ");
+	//ahora lo suyo es llamar a obter libro por id y mostrar
+	//en una plantilal el resultado obtenido
+}
 
 function comprar_producto(){
 	if(nombre_login == ""){
