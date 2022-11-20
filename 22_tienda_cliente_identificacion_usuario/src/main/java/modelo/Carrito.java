@@ -13,12 +13,13 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Carrito {
+	
 	@OneToOne
 	private Usuario usuario;
 	
-	// Con mappedBy Evitamos la tabla intermedia, dice que la asociación la va a llebar a cabo carrito.
 	@OneToMany(mappedBy = "carrito", cascade = CascadeType.ALL)
-	private List<ProductoCarrito> productosCarrito = new ArrayList<ProductoCarrito>();
+	private List<ProductoCarrito> productosCarrito = 
+		new ArrayList<ProductoCarrito>();
 	
 	@Id
 	@GeneratedValue
@@ -48,6 +49,4 @@ public class Carrito {
 		this.productosCarrito = productosCarrito;
 	}
 	
-	
-
 }

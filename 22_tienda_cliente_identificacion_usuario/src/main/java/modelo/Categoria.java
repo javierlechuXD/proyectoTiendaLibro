@@ -15,25 +15,23 @@ import javax.persistence.Table;
 @Table(name = "tabla_categorias")
 public class Categoria {
 	
-	
 	private String nombre;
+	
 	@Column(name = "descripcion_categoria", length = 9000)
 	private String descripcion;
 	
-//	@OneToMany(fetch = FetchType.LAZY)
+//	@OneToMany( mappedBy = "categoria", fetch = FetchType.LAZY)
 //	private List<Libro> libros = new ArrayList<Libro>();
-	
+
 	@Id
 	@GeneratedValue
 	private int id;
 	
-	
 	public Categoria() {
-		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public Categoria(String nombre, String descripcion) {
-		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 	}

@@ -1,18 +1,17 @@
 listado de libros en venta:<br>
 
-{{#.}}
-	<div style="margin: 20px;">
-		
-		<div>
-			<img src="subidas/{{id}}.jpgtoken={fechaImagenPortada1}" style="height: 80px"/>
-		</div>
-		<div>
-			titulo: {{titulo}} <br>
-			precio: {{precio}} <br>
-			<a href="#" id_producto="{{id}}" class="enlace_detalles" >ver detalles</a> <br>
-			<input type="number" id="input-cantidad-{{id}}" value="1"/>
-			<a href="#" id_producto="{{id}}" class="enlace_comprar" >comprar producto</a>
-		</div>
-		
-	</div>
-{{/.}}
+<div style="margin: 10px;">
+	buscador:<br> 
+	titulo: <input id="buscador_titulo" type="text" /> 
+</div>
+
+<div>
+
+	<a href="#" id="enlace_anterior" >anterior</a> &nbsp;
+
+	<a href="#" style="position: absolute;left: 200px" id="enlace_siguiente" >siguiente</a>
+	
+</div>
+
+<div id="productos_listado">
+</div>

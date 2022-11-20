@@ -7,8 +7,9 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class LibroDetalles {
-	
+
 	private String idioma;
+	
 	private String titulo;
 	private String descripcion;
 	
@@ -18,7 +19,5 @@ public class LibroDetalles {
 	
 	@ManyToOne
 	private Libro libro;
-	
-	
 	
 }

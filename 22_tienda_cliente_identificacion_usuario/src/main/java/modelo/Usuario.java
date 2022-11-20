@@ -12,7 +12,7 @@ public class Usuario {
 	private String nombre;
 	private String pass;
 	private String email;
-	 
+	
 	@OneToOne
 	private Carrito carrito;
 	
@@ -53,26 +53,27 @@ public class Usuario {
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
+	
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	
-
 	public Carrito getCarrito() {
 		return carrito;
 	}
 
 	public void setCarrito(Carrito carrito) {
 		this.carrito = carrito;
+	}
+
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	@Override

@@ -4,13 +4,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-// Facilidad para cuando se cree la base de datos de nuevo, tener algunos registros
-// con los que poder probar cosas
+//facilidad, para cuando se cree la base de datos 
+//de nuevo, tener algunos registros con los 
+//que poder probar cosas
 
 @Entity
 public class SetUp {
-	private boolean completo;
 	
+	private boolean completo;
+
 	@Id
 	@GeneratedValue
 	private int id;
@@ -32,6 +34,4 @@ public class SetUp {
 	}
 	
 	
-	
-
 }

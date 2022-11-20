@@ -3,6 +3,7 @@ package serviciosImpl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import constantes.Paginacion;
+import constantesSQL.ConstantesSQL;
 import modelo.Categoria;
 import modelo.Libro;
 import servicios.ServicioLibros;
@@ -32,12 +34,23 @@ public class ServicioLibrosImpl implements ServicioLibros{
 
 	@Override
 	public void registrarLibro(Libro l) {
-		Categoria c = (Categoria)sessionFactory.getCurrentSession().get(Categoria.class, l.getIdCategoria());
-		l.setCategoria(c);;
-		
+		//ejemplo registrando la categoria de id 1
+		Categoria c =
+				(Categoria)
+				sessionFactory.getCurrentSession().get(Categoria.class, l.getIdCategoria());
+		l.setCategoria(c);		
 		sessionFactory.getCurrentSession().save(l);
 		//hibernate una vez ha registrado un objeto
 		//le asigna al mismo la id generada
+	}
+	
+	@Override
+	public int obtenerTotalDeLibros(String titulo) {
+		SQLQuery query = sessionFactory.getCurrentSession().
+				createSQLQuery(ConstantesSQL.OBTENER_TOTAL_LIBROS);
+		query.setParameter("titulo", "%"+titulo+"%");
+		
+		return Integer.parseInt(query.list().get(0).toString());
 	}
 
 	@Override
@@ -63,12 +76,19 @@ public class ServicioLibrosImpl implements ServicioLibros{
 
 	@Override
 	public void guardarCambiosLibro(Libro l) {
-		System.out.println("Editando libro con id:" + l.getId());
-		Categoria c = (Categoria)sessionFactory.getCurrentSession().get(Categoria.class, l.getIdCategoria());
+		Categoria c = 
+				(Categoria)
+				sessionFactory.getCurrentSession().
+					get(Categoria.class,l.getIdCategoria());
 		l.setCategoria(c);
 		sessionFactory.getCurrentSession().merge(l);
 	}
-	
+
+
 	
 	
 }
+
+
+
+

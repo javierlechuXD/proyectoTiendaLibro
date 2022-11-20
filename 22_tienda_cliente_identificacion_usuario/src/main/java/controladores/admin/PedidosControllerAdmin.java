@@ -12,7 +12,6 @@ import constantes.EstadosPedido;
 import modelo.Pedido;
 import servicios.ServicioPedidos;
 
-
 @Controller
 @RequestMapping("admin/")
 public class PedidosControllerAdmin {
@@ -22,21 +21,29 @@ public class PedidosControllerAdmin {
 	
 	@RequestMapping("gestionarPedidos")
 	public String gestionarPedidos(Model model) {
-		model.addAttribute("pedidos", servicioPedidos.obtenerPedidos());
+		model.addAttribute("pedidos",servicioPedidos.obtenerPedidos());
 		return "admin/gestionarPedidos";
 	}
 	
 	@RequestMapping("verDetallesPedido")
 	public String verDetallesPedido(String id, Model model) {
 		Pedido p = servicioPedidos.obtenerPedidoPorId(Integer.parseInt(id));
-		model.addAttribute("pedido", p);
+		model.addAttribute("pedido",p);
 		
-		Map<String, String> estados = new HashMap<String, String>();
-		estados.put(EstadosPedido.COMPLETADO, "Completado por usuario");
-		estados.put(EstadosPedido.LISTO_PARA_ENVIAR, "Listo para enviar");
-		estados.put(EstadosPedido.ENVIADO, "Enviado");
-		model.addAttribute("estados", estados);
+		Map<String, String> estados = new HashMap<String,String>();
+		estados.put(EstadosPedido.COMPLETADO, "completado por el usuario");
+		estados.put(EstadosPedido.LISTO_PARA_ENVIAR, "listo para enviar");
+		estados.put(EstadosPedido.ENVIADO, "enviado");
+		model.addAttribute("estados",estados);
+		
 		return "admin/detallesPedido";
 	}
-
+	
 }
+
+
+
+
+
+
+

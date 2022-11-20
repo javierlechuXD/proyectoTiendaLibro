@@ -20,9 +20,9 @@ public class ServicioWebPlantillas {
 	@RequestMapping("ServicioWebPlantillas")
 	public ResponseEntity<String> plantillas( HttpServletRequest request ){
 		
-		String idiomaActucal = LocaleContextHolder.getLocale().toString();
+		String idiomaActual = LocaleContextHolder.getLocale().toString();
 		String carpetaPlantillas = "plantillas";
-		if(idiomaActucal.startsWith("en")) {
+		if(idiomaActual.startsWith("en")) {
 			carpetaPlantillas = "plantillas_en";
 		}
 		

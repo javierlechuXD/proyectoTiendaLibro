@@ -11,49 +11,80 @@ import modelo.Libro;
 import modelo.SetUp;
 import modelo.Usuario;
 
-// utilidad para preparar registros
+//utilidad para preparar unos registros
 
 @Service
 @Transactional
-public class ServicioSetUp implements InterfazSetUp {
+public class ServicioSetUp implements InterfazSetUp{
 
 	@Autowired
-	SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 	
+	@Override
 	public void setUp() {
-		Criteria c = sessionFactory.getCurrentSession().createCriteria(SetUp.class);
-		
-		if (c.list().size() == 0) {
+		Criteria c = 
+				sessionFactory.getCurrentSession().
+					createCriteria(SetUp.class);
+		if ( c.list().size() == 0 ) {
 			//preparamos unos registros
-			
-			sessionFactory.getCurrentSession().save(new Usuario("ares", "123", "ares@gmail.com"));
-			
-			sessionFactory.getCurrentSession().save(new Usuario("javi", "123", "javi@gmail.com"));
-			
-			sessionFactory.getCurrentSession().save(new Usuario("lechu", "123", "lechu@gmail.com"));
-			
-			Categoria novela = new Categoria("novela", "categoría novela clásica");
-			sessionFactory.getCurrentSession().save(novela);
-			
-			Categoria aventura = new Categoria("aventura", "categoría aventura clásica");
-			sessionFactory.getCurrentSession().save(aventura);
-			
-			Categoria terror = new Categoria("terror", "categoría terror clásica");
-			sessionFactory.getCurrentSession().save(terror);
-			
-			sessionFactory.getCurrentSession().save(new Libro("El quijote", 10.5, true, terror));
-			sessionFactory.getCurrentSession().save(new Libro("Salmón", 13.5, true, aventura));
-			sessionFactory.getCurrentSession().save(new Libro("Lechu Valiente", 12.5, true, novela));
-			
-			String titulo = "100 Años de soledad";
+			sessionFactory.getCurrentSession().save( 
+					new Usuario("ares", "123", "ares@gmail.com") 
+				);
+			sessionFactory.getCurrentSession().save( 
+					new Usuario("pepe", "123", "pepe@gmail.com") 
+				);
+			sessionFactory.getCurrentSession().save( 
+					new Usuario("juan", "123", "juan@gmail.com") 
+				);
+			//categorias
+			Categoria novela = new Categoria("novela","categoria novela clasica");
+			sessionFactory.getCurrentSession().save(
+					novela
+					);
+			Categoria cienciaFiccion = new Categoria("ciencia ficcion","categoria ciencia ficcion");
+			sessionFactory.getCurrentSession().save(
+					cienciaFiccion
+					);
+			sessionFactory.getCurrentSession().save(
+					new Categoria("aventura","categoria aventura")
+					);
+			//libros
+			//registrar 100 un libro de prueba para ver paginacion:
+			String titulo = "100 Años de soledad ";
 			for (int i = 0; i < 100; i++) {
-				String tituloGuardar = titulo + i;
-				sessionFactory.getCurrentSession().save(new Libro(tituloGuardar, 33.5, true, novela));
+				String tituloAguardar = titulo + i;
+				sessionFactory.getCurrentSession().save(
+						new Libro(tituloAguardar, 10, true, novela)
+						);
 			}
 			
+			sessionFactory.getCurrentSession().save(
+					new Libro("El Quijote", 10.5, true, novela)
+					);
+			sessionFactory.getCurrentSession().save(
+					new Libro("La Celestina", 7.5, true, novela)
+					);
+			sessionFactory.getCurrentSession().save(
+					new Libro("Jurassic Park", 7, true, cienciaFiccion)
+					);
+			
+			//copiar archivos de portada de libros
+			//desde una ruta fija
+			
+			//setup completado
 			SetUp setUp = new SetUp();
 			setUp.setCompleto(true);
 			sessionFactory.getCurrentSession().save(setUp);
-		}
-	}
+			
+		} //end if
+		
+	}//end setUp
+	
 }
+
+
+
+
+
+
+

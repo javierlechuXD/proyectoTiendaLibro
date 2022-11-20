@@ -8,15 +8,12 @@
 </head>
 <body>
 
-    Identificate admin: 
+Identificate admin:
 
-    <form method="post" action="admin/">
-        pass: <input type="password" name="pass"/> <br>
-
-        <input type="submit"/>
- 
-    </form>
-
+<form method="post" action="admin/">
+	pass: <input type="password" name="pass" /> <br>
+	<input type="submit"/>
+</form>
 
 </body>
 </html>

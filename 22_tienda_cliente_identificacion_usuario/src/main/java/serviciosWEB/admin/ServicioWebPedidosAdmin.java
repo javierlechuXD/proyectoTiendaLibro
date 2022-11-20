@@ -24,6 +24,12 @@ public class ServicioWebPedidosAdmin {
 		servicioPedidos.actualizarEstadoPedido(Integer.parseInt(id), estado);
 		respuesta = "estado actualizado correctamente";
 		return new ResponseEntity<String>(respuesta,HttpStatus.OK);	
-	}
+	}//end agregarLibro
 
 }
+
+
+
+
+
+

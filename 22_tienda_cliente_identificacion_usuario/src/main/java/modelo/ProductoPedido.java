@@ -52,6 +52,4 @@ public class ProductoPedido {
 		this.id = id;
 	}
 	
-	
-	
 }

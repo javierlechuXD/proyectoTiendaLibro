@@ -7,31 +7,30 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class InterceptorAdmin extends HandlerInterceptorAdapter{
 
-	// Este método se ejecuta antes de las llamadas a la/s rutas asociadas al interceptor
+	//este metodo se ejecuta antes de las llamadas a la/s rutas 
+	//asociadas al interceptor
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
-		//Para el caso en el que se identifique en el admin en loginAdmin.jsp
-		if (request.getParameter("pass") != null && 
-			request.getParameter("pass").equals("123")) {
-			//Metemos un pequeño toquen en sesión, para indicar que el usuario actual es administrador
+	
+		//para el caso en que se identifique el admin en loginAdmin.jsp
+		if( request.getParameter("pass")!=null && 
+			request.getParameter("pass").equals("123")){
+			//metemos un pequeño token en sesion para indicar que el 
+			//usuario actual es administrador
 			request.getSession().setAttribute("admin", "ok");
-		}
+		}//end if form loginAdmin.jsp
 		
-		// Para sucesivas llamadas a cualquier ruta en /admin/
-		
-		if (request.getSession().getAttribute("admin") != null && 
+		//para sucesivas llamadas a cualquier ruta en /admin/
+		if( request.getSession().getAttribute("admin") != null && 
 			request.getSession().getAttribute("admin").equals("ok")) {
 			return true;
 		}else {
-			// forzar redirección a loginAdmin.jsp
+			//forzar redireccion a loginAdmin.jsp
 			response.sendRedirect("../loginAdmin.jsp");
-			
-			// Se indica si el interceptor ha actudado
 			return false;
-		}
-	}
-
+		}//end else
+		
+	}//end preHandle
 	
-}
+}//end class

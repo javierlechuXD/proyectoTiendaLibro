@@ -22,26 +22,35 @@ public class ServicioWebCarrito {
 	
 	@RequestMapping("agregarLibro")
 	public ResponseEntity<String> agregarLibro(String idProducto, String cantidad, HttpServletRequest request){
-		String respuesta= "agregar el producto de id: " + idProducto + "Cantidad: " +
-				cantidad + " al carrito del usuario: " + 
+		String respuesta= "agregar el producto de id: " + idProducto +
+				" cantidad: " + cantidad + 
+				" al carrito del usuario: " + 
 				((Usuario)request.getSession().getAttribute("usuario")).getNombre();
-		servicioCarrito.agregarProducto((Usuario)request.getSession().getAttribute("usuario"), Integer.parseInt(idProducto), Integer.parseInt(cantidad));
-		respuesta = "Agregado correctamente";
+		//vamos a hacerlo:
+		servicioCarrito.agregarProducto(
+				(Usuario)request.getSession().getAttribute("usuario"),
+				 Integer.parseInt(idProducto), 
+				 Integer.parseInt(cantidad));
+		respuesta = "producto agregado al carrito correctamente";
+		
 		return new ResponseEntity<String>(respuesta,HttpStatus.OK);
 				
-	}
+	}//end agregarLibro
 	
-	@RequestMapping("obtenerProdcutosCarrito")
-	public ResponseEntity<String> obtenerProdcutosCarrito(HttpServletRequest request){
+	@RequestMapping("obtenerProductosCarrito")
+	public ResponseEntity<String> obtenerProductosCarrito(HttpServletRequest request){
 		String respuesta = "";
 		
-		respuesta = new Gson().toJson(servicioCarrito.obtenerProductosCarrito((Usuario)request.getSession().getAttribute("usuario")));
+		respuesta = new Gson().toJson( 
+				servicioCarrito.obtenerProductoCarrito(
+					(Usuario)request.getSession().getAttribute("usuario")
+						));
 		
 		
 		return new ResponseEntity<String>(respuesta,HttpStatus.OK);
-	}
+	}//end obtenerProductosCarrito
 
-}
+}//end class
 
 
 

@@ -17,26 +17,32 @@ import servicios.ServicioCategorias;
 @Service
 @Transactional
 public class ServicioCategoriasImpl implements ServicioCategorias{
+
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	
 	@Override
 	public Map<String, String> obtenerCategoriasParaDesplegable() {
-		// Para lanzar SQL a traves de hibernate:
-		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(ConstantesSQL.SQL_OBTENER_CATEGORIAS_PARA_DESPLEGABLE);
-		// Para indicar que la consulta me devuelva elementos de tipo Map debo indicar:
+		//para lanzar sql a traves de hibernate:
+		SQLQuery query = sessionFactory.getCurrentSession().
+				createSQLQuery(ConstantesSQL.SQL_OBTENER_CATEGORIAS_PARA_DESPLEGABLE);
+		//para indicar que la consulta me devuelva elementos de tipo Map
+		//debo indicar la siguiente
 		query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
 		List<Map<String, Object>> resultado = query.list();
 		
-		// Debemos volver a tranformar lo que nos da Hibernate
+		//debemos transformar de nuevo lo que nos da hibernate:
 		Map<String, String> valoresDesplegable = new HashMap<>();
-		
-		for (Map<String, Object> map : resultado) {
-			System.out.println("Obtenido: " + map.get("id") + "nombre: " + map.get("nombre"));
-			valoresDesplegable.put(map.get("id").toString(), map.get("nombre").toString());
+		for (Map<String,Object> map : resultado) {
+			System.out.println(" obtenido: " + map.get("id") + " nombre: " + 
+								map.get("nombre"));
+			valoresDesplegable.put(map.get("id").toString(), 
+					map.get("nombre").toString());
 		}
 		return valoresDesplegable;
 	}
 
 }
+
+
+
