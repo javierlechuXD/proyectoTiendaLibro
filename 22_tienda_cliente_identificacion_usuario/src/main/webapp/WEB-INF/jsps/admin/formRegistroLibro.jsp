@@ -15,12 +15,22 @@ con enctype="multipart/form-data" indicamos que el formulario va a contener
 un archivo
  -->
 <springform:form modelAttribute="nuevoLibro" action="guardarNuevoLibro" enctype="multipart/form-data" >
-	titulo: <springform:input path="titulo"/> <br>
-	alta: <springform:checkbox path="alta"/> <br>
-	precio: <springform:input path="precio"/> <br>
+	titulo: <springform:input path="titulo"/> 
+	<span style="color: red"><springform:errors path="titulo"/></span>
+	<br>
+	
+	alta: <springform:checkbox path="alta"/> 
+	<span style="color: red"><springform:errors path="alta"/></span>
+	<br>
+	
+	precio: <springform:input path="precio"/>
+	<span style="color: red"><springform:errors path="precio"/></span>
+	<br>
+	
 	categoría: <springform:select path="idCategoria">
-			<springform:options items="${categorias}"></springform:options><br>
-	</springform:select>
+					<springform:options items="${categorias}"></springform:options><br>
+				</springform:select>
+	
 	portada: <springform:input path="portada" type="file" /> <br>
 	
 	<input type="submit" value="Registrar Libro">

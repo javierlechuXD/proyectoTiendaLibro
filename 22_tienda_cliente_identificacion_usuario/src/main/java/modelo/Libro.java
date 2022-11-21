@@ -11,14 +11,32 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
 import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 public class Libro {
 
+	@NotEmpty(message = "Titulo no puede estar vacio")
+	@Size(min = 1, max = 40, message = "Titulo debe tener entre 1 y 40 caracterec")
+	@Pattern(regexp = "^[a-zA-Z áéíóúÁÉÍÓÚñÑ0-9]{1,40}$", message = "Solo letras y números")
 	private String titulo;
+	
+	@NotEmpty(message = "Descripción no puede estar vacio")
+	@Size(min = 1, max = 2000, message = "Descripción debe tener entre 1 y 2000 caracterec")
+	@Pattern(regexp = "^[a-zA-Z ().,áéíóúÁÉÍÓÚñÑ0-9]{1,2000}$", message = "Solo letras, números, puntos, comas y paréntesis")
 	private String descripcion;
+	
+	@NumberFormat(style = Style.CURRENCY, pattern = "#,###.###")
+	@Min(value = 1, message = "El precio mímimo es de un euro")
+	@Max(value = 9999, message = "El precio máximo es de 9999")
 	private double precio;
 	private boolean alta;
 	
@@ -60,6 +78,17 @@ public class Libro {
 		this.alta = alta;
 		this.categoria = categoria;
 	}
+	
+	public Libro(String titulo, String descripcion, double precio, boolean alta, Categoria categoria) {
+		super();
+		this.titulo = titulo;
+		this.descripcion = descripcion;
+		this.precio = precio;
+		this.alta = alta;
+		this.categoria = categoria;
+	}
+	
+	
 	
 	
 

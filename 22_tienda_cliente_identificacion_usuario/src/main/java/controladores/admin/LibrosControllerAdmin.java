@@ -5,10 +5,13 @@ import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -53,20 +56,24 @@ public class LibrosControllerAdmin {
 	}
 	
 	@RequestMapping("guardarNuevoLibro")
-	public String guardarNuevoLibro(Libro nuevoLibro, Model model, HttpServletRequest request ) {
-		
-		if (nuevoLibro.getPortada().getSize() != 0) {
-			nuevoLibro.setFechaImagenPortada1(new Date());
+	public String guardarNuevoLibro(@ModelAttribute("nuevoLibro") @Valid Libro nuevoLibro, BindingResult br, Model model, HttpServletRequest request ) {
+		if(! br.hasErrors()) {
+			if (nuevoLibro.getPortada().getSize() != 0) {
+				nuevoLibro.setFechaImagenPortada1(new Date());
+			}
+	
+			servicioLibros.registrarLibro(nuevoLibro);
+			String rutaRealDelProyecto = 
+					request.getServletContext().getRealPath("");
+	
+			
+			GestorArchivos.guardarPortadaLibro(nuevoLibro, rutaRealDelProyecto);
+			return gestionarLibros(model, "", "0");
+		}else {
+			model.addAttribute("nuevoLibro", nuevoLibro);
+			model.addAttribute("categorias",servicioCategorias.obtenerCategoriasParaDesplegable());
+			return "admin/formRegistroLibro";
 		}
-
-		servicioLibros.registrarLibro(nuevoLibro);
-		String rutaRealDelProyecto = 
-				request.getServletContext().getRealPath("");
-
-		
-		GestorArchivos.guardarPortadaLibro(nuevoLibro, rutaRealDelProyecto);
-		return gestionarLibros(model, "", "0");
-		
 	}
 	
 	@RequestMapping("borrarLibro")

@@ -10,6 +10,15 @@ function cargarEventos(){
 	
 	$("#login").click(function(){
 		$("#contenedor").html(plantillas.login);
+		// typeof indica el tipo de elemento, lo usamos para saber si existe
+		if(typeof(Cookies.get("email")) != "undefined"){
+			$("#email").val(Cookies.get("email"));
+		}
+		
+		if(typeof(Cookies.get("pass")) != "undefined"){
+		$("#pass").val(Cookies.get("pass"));
+		}
+		
 		$("#form_login").submit(function(e){
 			e.preventDefault();
 			identificar_usuario();
@@ -28,6 +37,13 @@ function cargarEventos(){
 			// No podemos coger el elemento por JQUERY
 			let formulario = this;
 			let formData = new FormData(formulario);
+			// Validar los campos de formulario - cliente
+			// Del formData puedo obtener el input que quiera por su name, no su id.
+			if(!validarNombre(formData.get("nombre")) || !validarEmail(formData.get("email")) || !validarPass(formData.get("pass")) ){
+				return false;
+			}
+			
+			
 			$.ajax("ServicioWebUsuarios/registrarUsuario",{
 				type: "POST",
 				data: formData,
@@ -35,7 +51,12 @@ function cargarEventos(){
 				contentType: false,
 				processData: false,
 				success: function(res){
-					alert(res);
+					if(res == "ok"){
+						alert("Ya puedes identificarte con tus datos");
+						identificar_usuario();
+					}else{
+						alert(res);
+					}
 				}
 			});
 			

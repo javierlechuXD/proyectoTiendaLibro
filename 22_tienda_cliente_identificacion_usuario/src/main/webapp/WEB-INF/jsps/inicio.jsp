@@ -30,12 +30,14 @@
 
 </div>
 <script type="text/javascript" src="librerias_js/jquery.js"></script>
-<script type="text/javascript" src="librerias_js/mustache.js" ></script>
+<script type="text/javascript" src="librerias_js/mustache.js"></script>
+<script type="text/javascript" src="librerias_js/js.cookie.min.js" ></script>
 <script type="text/javascript" src="javascript/cargar_plantillas.js"></script>
 <script type="text/javascript" src="javascript/cargar_eventos.js"></script>
 <script type="text/javascript" src="javascript/funciones.js"></script>
 <script type="text/javascript" src="javascript/globales.js"></script>
 <script type="text/javascript" src="javascript/funciones_checkout.js"></script>
+<script type="text/javascript" src="javascript/validaciones.js"></script>
 <script type="text/javascript">
 	idioma_actual = "<spring:message code="codigo.idioma"/>";
 	carga_archivos_plantillas(idioma_actual);

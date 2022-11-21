@@ -44,14 +44,16 @@ public class ServicioSetUp implements InterfazSetUp {
 
 			
 			String titulo = "100 Años de soledad";
+			String descripcion = "Descripción por defecto";
 			for (int i = 0; i < 100; i++) {
 				String tituloGuardar = titulo + i;
-				sessionFactory.getCurrentSession().save(new Libro(tituloGuardar, 33.5, true, novela));
+				String descripcionGuardar = descripcion + i;
+				sessionFactory.getCurrentSession().save(new Libro(tituloGuardar, descripcionGuardar, 33.5, true, novela));
 			}
 			
-			sessionFactory.getCurrentSession().save(new Libro("El quijote", 10.5, true, terror));
-			sessionFactory.getCurrentSession().save(new Libro("Salmón", 13.5, true, aventura));
-			sessionFactory.getCurrentSession().save(new Libro("Lechu Valiente", 12.5, true, novela));
+			sessionFactory.getCurrentSession().save(new Libro("El quijote","Descripción por defecto", 10.5, true, terror));
+			sessionFactory.getCurrentSession().save(new Libro("Salmón","Descripción por defecto", 13.5, true, aventura));
+			sessionFactory.getCurrentSession().save(new Libro("Lechu Valiente","Descripción por defecto", 12.5, true, novela));
 			
 			SetUp setUp = new SetUp();
 			setUp.setCompleto(true);

@@ -109,6 +109,12 @@ function identificar_usuario(){
 			var respuesta = res.split(",")[0];
 			var mensaje = res.split(",")[1];
 			if(respuesta == "ok"){
+				// Si el usuario activó recordar datos, guardamos su email y pass en una cookie
+				if($("#recordar_datos").prop("checked")){
+					Cookies.set('email',email,{ expires:100 });
+					Cookies.set('pass',pass,{ expires:100 });
+				}
+				
 				alert("bienvenido " + mensaje + " ya puedes comprar");
 				nombre_login = mensaje;
 				mostrar_productos();
