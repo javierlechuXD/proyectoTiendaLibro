@@ -16,6 +16,8 @@ public interface ServicioUsuarios {
 	
 	void guardarCambiosUsuario(Usuario u);
 	
+	Usuario obtenerUsuarioPorEmail(String email);
+	
 	Usuario obtenerUsuarioPorEmailYPass(String email, String pass);
 
 }

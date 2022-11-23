@@ -37,11 +37,17 @@ public class ServicioWebUsuarios {
 		Gson gson = new Gson();
 		JsonElement json = gson.toJsonTree(formData);
 		Usuario u = gson.fromJson(json, Usuario.class);
-		System.out.println("Usuario a registrar: " +  u.toString());
-		String rutaRealDelProyecto = 
-				request.getServletContext().getRealPath("");
-		servicioUsuarios.registrarUsuario(u);
-		GestorArchivos.guardarFotoUsuario(u, foto, rutaRealDelProyecto);
+		
+		if (servicioUsuarios.obtenerUsuarioPorEmail(u.getEmail()) == null) {
+			System.out.println("Usuario a registrar: " +  u.toString());
+			String rutaRealDelProyecto = 
+					request.getServletContext().getRealPath("");
+			servicioUsuarios.registrarUsuario(u);
+			GestorArchivos.guardarFotoUsuario(u, foto, rutaRealDelProyecto);
+		}else {
+			respuesta = "email ya registrado";
+		}
+
 		
 // FORMA ANTOGIA, SIN FORM DATA NI SUBIDA DE ARCHIVOS
 //		Usuario u = new Gson().fromJson(json, Usuario.class);

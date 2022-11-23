@@ -54,6 +54,7 @@ public class ServicioLibrosImpl implements ServicioLibros{
 	@Override
 	public List<Libro> obtenerLibros(String titulo, int comienzo) {
 		Criteria c = sessionFactory.getCurrentSession().createCriteria(Libro.class);
+		c.add(Restrictions.eq("alta", true));
 		c.add(Restrictions.like("titulo", "%"+titulo+"%"));
 		c.addOrder(Order.desc("id"));
 		c.setFirstResult(comienzo);
@@ -64,7 +65,9 @@ public class ServicioLibrosImpl implements ServicioLibros{
 	@Override
 	public void borrarLibro(int id) {
 		Libro l = (Libro)sessionFactory.getCurrentSession().get(Libro.class,id);
-		sessionFactory.getCurrentSession().delete(l);
+		l.setAlta(false);
+		sessionFactory.getCurrentSession().update(l);
+		//sessionFactory.getCurrentSession().delete(l);
 	}
 
 	@Override
@@ -77,6 +80,7 @@ public class ServicioLibrosImpl implements ServicioLibros{
 		System.out.println("Editando libro con id:" + l.getId());
 		Categoria c = (Categoria)sessionFactory.getCurrentSession().get(Categoria.class, l.getIdCategoria());
 		l.setCategoria(c);
+		//Merge crea si no lo encuentra, mienstras que update solo actualiza 
 		sessionFactory.getCurrentSession().merge(l);
 	}
 

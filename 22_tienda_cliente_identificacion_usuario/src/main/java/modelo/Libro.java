@@ -24,9 +24,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Entity
 public class Libro {
 
-	@NotEmpty(message = "Titulo no puede estar vacio")
-	@Size(min = 1, max = 40, message = "Titulo debe tener entre 1 y 40 caracterec")
-	@Pattern(regexp = "^[a-zA-Z áéíóúÁÉÍÓÚñÑ0-9]{1,40}$", message = "Solo letras y números")
+	@NotEmpty
+	@Size(min = 1, max = 40)
+	@Pattern(regexp = "^[a-zA-Z áéíóúÁÉÍÓÚñÑ0-9]{1,40}$")
 	private String titulo;
 	
 	@NotEmpty(message = "Descripción no puede estar vacio")

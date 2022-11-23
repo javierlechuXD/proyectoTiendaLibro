@@ -1,5 +1,6 @@
 package modelo;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,8 @@ public class Usuario {
 	
 	private String nombre;
 	private String pass;
+	
+	@Column(unique = true)
 	private String email;
 	 
 	@OneToOne

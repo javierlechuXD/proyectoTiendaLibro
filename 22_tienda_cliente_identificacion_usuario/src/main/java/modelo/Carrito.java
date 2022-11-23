@@ -17,7 +17,7 @@ public class Carrito {
 	private Usuario usuario;
 	
 	// Con mappedBy Evitamos la tabla intermedia, dice que la asociación la va a llebar a cabo carrito.
-	@OneToMany(mappedBy = "carrito", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "carrito")
 	private List<ProductoCarrito> productosCarrito = new ArrayList<ProductoCarrito>();
 	
 	@Id

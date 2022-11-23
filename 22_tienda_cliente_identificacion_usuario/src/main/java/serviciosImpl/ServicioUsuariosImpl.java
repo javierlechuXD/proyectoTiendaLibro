@@ -49,6 +49,18 @@ public class ServicioUsuariosImpl implements ServicioUsuarios{
 	}
 
 	@Override
+	public Usuario obtenerUsuarioPorEmail(String email) {
+		Criteria c = 
+				sessionFactory.getCurrentSession().createCriteria(Usuario.class);
+		c.add(Restrictions.eq("email", email));
+		Usuario u = null;
+		if(c.uniqueResult()!=null) {
+			u = (Usuario)c.uniqueResult();
+		}
+		return u;
+	}
+	
+	@Override
 	public Usuario obtenerUsuarioPorEmailYPass(String email, String pass) {
 		Criteria c = 
 				sessionFactory.getCurrentSession().createCriteria(Usuario.class);
@@ -60,5 +72,7 @@ public class ServicioUsuariosImpl implements ServicioUsuarios{
 		}
 		return u;
 	}
+
+
 	
 }
