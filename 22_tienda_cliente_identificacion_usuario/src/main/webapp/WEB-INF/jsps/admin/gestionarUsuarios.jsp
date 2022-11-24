@@ -21,7 +21,7 @@ gestion de usuarios: <br>
 	<div>
 		Foto: <img style="height: 80px" src="../subidas/u${usuario.id}.jpg"/> <br>
 		Nombre: ${usuario.nombre} | Email: ${usuario.email} 
-		<a onclick="return confirm('¿seguro?');" href="borrarUsuario?idBorrar=${usuario.id}">
+		<a onclick="return confirm('¿seguro?, Todos los pedidos del usuario serán eliminados');" href="borrarUsuario?idBorrar=${usuario.id}">
 			Borrar
 		</a>&nbsp;
 		<a href="editarUsuario?idEditar=${usuario.id}">
